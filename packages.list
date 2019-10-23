@@ -1,0 +1,66 @@
+apt-transport-https # allow the usage of apt repositories with https
+build-essential # needed for building software in general
+ca-certificates # common ca certificates
+chromium # alternative browser just in case
+cmatrix # matrix "screensaver"
+containerd.io # container runtime needed for docker
+curl # transfer data from or to a server with url syntax
+dbus-x11 # needed for launching gnome-terminal
+discord # voice and text chat
+docker-ce # docker 
+docker-ce-cli # docker cli
+feh # needed for wallpaper
+firefox-esr # primary browser
+fonts-noto # google noto fonts
+forensics-all # essential forensics tools
+forensics-extra # extra console forensics tools
+g++ # c++ compiler
+gimp # image editor
+git # control system
+gnome-terminal # gnome terminal emulator
+gnupg2 # gpg
+htop # interactive processes viewer
+hugo # static site generator written in golang
+i3blocks # i3 status line
+i3lock # screen locker
+i3-wm # i3 window manager
+jq # command-line json processor
+libbz2-dev # bz2 library
+libgmp-dev # multiprecision arithmetic library
+libimage-exiftool-perl # metadata library and program
+libpcap-dev # pcap library
+libreoffice # office suite
+libssl-dev # ssl library
+locate # search for files
+maim # takes screenshots
+metasploit-framework # metasploit
+neofetch # linux system information
+neomutt # command-line mail reader
+openssh-server # ssh server
+openvpn # vpn daemon
+pavucontrol # pulseaudio volume control gui (have to change)
+php # php language
+pipenv # python packaging tool / virtual environment manager
+pkg-config # needed for compile libraries
+pulseaudio # pulseaudio sound server
+pulseaudio-utils # pulseaudio command-line tool
+rbenv # simple ruby version manager
+rocketchat # rocket client
+sagemath # maths software
+smartmontools # smart storage benchmark
+software-properties-common # repositories manager
+spotify-client # spotify client
+suckless-tools # tools for minimalistic window managers (dmenu...)
+task-ssh-server # ssh server (openssh?)
+texlive-fonts-extra # latex fonts
+tldr # tldr client
+tmux # terminal multiplexer
+tree # displays directory tree
+vim-gtk # vim editor with gtk for easy clipboard integration
+virtualbox-6.0 # virtualbox package
+x11-xserver-utils # x server utilities
+xclip # command line interface to copy-paste
+xinit # x server initialisation tool
+xinput # configuration of xinput devices
+zlib1g-dev # compression library
+zsh # shell with lots of features
