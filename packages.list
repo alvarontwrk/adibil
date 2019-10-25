@@ -17,6 +17,7 @@ forensics-extra # extra console forensics tools
 g++ # c++ compiler
 gimp # image editor
 git # control system
+git-secret # git secret functionality
 gnome-terminal # gnome terminal emulator
 gnupg2 # gpg
 htop # interactive processes viewer
