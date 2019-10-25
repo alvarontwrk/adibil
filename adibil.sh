@@ -109,7 +109,8 @@ mv .zshrc.pre-oh-my-zsh .zshrc
 # set home 
 # bin dicts dload mnt pic projects scripts src uni vbox
 echo "[adibil] Setting home structure..."
-mkdir bin dicts dload mnt pic projects scripts src uni vbox
+mkdir bin dicts dload mnt pic projects src uni vbox
+git clone https://gitlab.com/AlvaroGarciaJaen/scripts.git
 xdg-user-dirs-update --set PICTURE $HOME/pic
 xdg-user-dirs-update --set DOWNLOAD $HOME/dload
 
@@ -126,6 +127,7 @@ sudo sed -i 's/NOPASSWD: ALL$/ALL/g' /etc/sudoers
 # get own scripts and wallpaper (where?)
 # disable useless services
 # add user to groups (wireshark, docker(if docker))
+# create symbolic links in ~/bin
 # it would be interesting to have it integrated with lyo so it automatically
 # copies the sshkey between the systems
 # have to setup compose key
