@@ -10,10 +10,7 @@ discord # voice and text chat
 docker-ce # docker 
 docker-ce-cli # docker cli
 feh # needed for wallpaper
-firefox-esr # primary browser
 fonts-noto # google noto fonts
-forensics-all # essential forensics tools
-forensics-extra # extra console forensics tools
 g++ # c++ compiler
 gimp # image editor
 git # control system
@@ -37,6 +34,7 @@ maim # takes screenshots
 metasploit-framework # metasploit
 neofetch # linux system information
 neomutt # command-line mail reader
+neovim # neovim
 openssh-server # ssh server
 openvpn # vpn daemon
 pavucontrol # pulseaudio volume control gui (have to change)
@@ -45,8 +43,6 @@ pipenv # python packaging tool / virtual environment manager
 pkg-config # needed for compile libraries
 pulseaudio # pulseaudio sound server
 pulseaudio-utils # pulseaudio command-line tool
-rbenv # simple ruby version manager
-rocketchat # rocket client
 sagemath # maths software
 smartmontools # smart storage benchmark
 software-properties-common # repositories manager
@@ -64,4 +60,3 @@ xclip # command line interface to copy-paste
 xinit # x server initialisation tool
 xinput # configuration of xinput devices
 zlib1g-dev # compression library
-zsh # shell with lots of features

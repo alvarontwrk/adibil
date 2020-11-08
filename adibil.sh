@@ -68,7 +68,7 @@ sudo apt -y upgrade
 # install tools
 # read the packages.list file and format it for apt install
 mkdir /tmp/adibil
-wget -qO /tmp/adibil/packages.list https://gitlab.com/AlvaroGarciaJaen/adibil/raw/master/packages.list
+wget -qO /tmp/adibil/packages.list https://gitlab.com/alvarontwrk/adibil/raw/master/packages.list
 packages=$(grep -Eo '^.* #' /tmp/adibil/packages.list | tr -d ' #' | tr '\n' ' '\')
 # for now lets skip docker and virtualbox
 #packages=$(grep -v docker /tmp/adibil/packages.list | grep -Eo '^.* #' | tr -d '#' | tr '\n' ' '\')
@@ -90,30 +90,30 @@ config() {
 # if we use ssh here we need to accept the fingerprint: StrictHostKeyChecking no
 # maybe with ssh config file
 echo "[adibil] Cloning dotfiles..."
-git clone --bare https://gitlab.com/AlvaroGarciaJaen/dotfiles.git $HOME/.dotfiles
+git clone --bare https://github.com/alvarontwrk/dotfiles.git $HOME/.dotfiles
 echo "[adibil] Deleting previous .bashrc..."
 rm .bashrc
 echo "[adibil] Updating files..."
 config checkout
 config config --local status.showUntrackedFiles no
 
-echo "[adibil] Changing shell to zsh..."
-zshpath=$(which zsh)
-sudo sed -i 's@'"$HOME"'.*@'"$HOME"':'"$zshpath"'@g' /etc/passwd
+#echo "[adibil] Changing shell to zsh..."
+#zshpath=$(which zsh)
+#sudo sed -i 's@'"$HOME"'.*@'"$HOME"':'"$zshpath"'@g' /etc/passwd
 
-echo "[adibil] Changing default browser..."
-xdg-settings set default-web-browser firefox-esr.desktop
+#echo "[adibil] Changing default browser..."
+#xdg-settings set default-web-browser firefox-esr.desktop
 
 # install oh-my-zsh
-echo "[adibil] Installing oh-my-zsh..."
-wget -qO- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
-mv .zshrc.pre-oh-my-zsh .zshrc
+#echo "[adibil] Installing oh-my-zsh..."
+#wget -qO- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
+#mv .zshrc.pre-oh-my-zsh .zshrc
 
 # set home 
 # bin dicts dload mnt pic projects scripts src uni vbox
 echo "[adibil] Setting home structure..."
-mkdir bin dicts dload mnt pic projects src uni vbox
-git clone https://gitlab.com/AlvaroGarciaJaen/scripts.git
+mkdir bin dicts dload mnt pic projects src uni
+git clone https://gitlab.com/alvarontwrk/scripts.git
 xdg-user-dirs-update --set PICTURE $HOME/pic
 xdg-user-dirs-update --set DOWNLOAD $HOME/dload
 
