@@ -60,3 +60,4 @@ xclip # command line interface to copy-paste
 xinit # x server initialisation tool
 xinput # configuration of xinput devices
 zlib1g-dev # compression library
+zsh # zsh shell
