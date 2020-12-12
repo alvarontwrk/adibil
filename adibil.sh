@@ -4,6 +4,7 @@
 # IMPORTANT: for an unattended installation change timeout or NOPASSWD directive
 # check with 'id'
 # need to add zsh to /etc/passwd
+export DEBIAN_FRONTEND=noninteractive
 echo "[adibil] Checking UID..."
 shopt -s nocasematch
 
@@ -28,6 +29,9 @@ sudo sed -i 's/ALL$/NOPASSWD: ALL/g' /etc/sudoers
 # add non-free and contrib packages
 echo "[adibil] Adding non-free and contrib packages to source..."
 sudo sed -i 's/main/main non-free contrib/g' /etc/apt/sources.list
+echo "[adibil] Adding bullseye packages to source..."
+sudo sed -i 's/buster/bullseye/g' /etc/apt/sources.list
+sudo sed -i 's/bullseye\/updates/bullseye-security/g' /etc/apt/sources.list
 
 deb_metasploit='deb http://downloads.metasploit.com/data/releases/metasploit-framework/apt buster main'
 deb_spotify='deb http://repository.spotify.com stable non-free'
@@ -60,8 +64,10 @@ fi
 # apt upgrade
 echo "[adibil] Updating repositories..."
 sudo apt update
+echo "[adibil] Install libgcc 8..."
+sudo apt -y install gcc-8-base
 echo "[adibil] Upgrading packages..."
-sudo apt -y upgrade
+sudo apt -y full-upgrade
 
 # TODO
 # install environment
