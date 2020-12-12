@@ -67,9 +67,9 @@ fi
 # apt upgrade
 echo "[adibil] Updating repositories..."
 sudo apt update
-exit
 echo "[adibil] Upgrading packages..."
-sudo apt -y full-upgrade
+sudo apt -y full-upgrade -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold'
+exit
 
 # TODO
 # install environment
