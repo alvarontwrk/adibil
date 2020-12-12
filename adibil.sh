@@ -68,7 +68,7 @@ fi
 echo "[adibil] Updating repositories..."
 sudo apt update
 echo "[adibil] Upgrading packages..."
-sudo apt -y full-upgrade -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold'
+sudo apt -y upgrade -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold'
 exit
 
 # TODO
