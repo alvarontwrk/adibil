@@ -67,9 +67,9 @@ fi
 # apt upgrade
 echo "[adibil] Updating repositories..."
 sudo apt update
+exit
 echo "[adibil] Upgrading packages..."
 sudo apt -y full-upgrade
-exit
 
 # TODO
 # install environment
