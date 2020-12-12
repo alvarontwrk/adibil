@@ -69,7 +69,6 @@ echo "[adibil] Updating repositories..."
 sudo apt update
 echo "[adibil] Upgrading packages..."
 sudo DEBIAN_FRONTEND=noninteractive apt -y full-upgrade -o Dpkg::Options::='--force-confdef' -o Dpkg::Options::='--force-confold'
-exit
 
 # TODO
 # install environment
@@ -83,7 +82,7 @@ packages=$(grep -Eo '^.* #' /tmp/adibil/packages.list | tr -d ' #' | tr '\n' ' '
 #packages=$(echo $packages | sed 's/virtualbox-6.0//g')
 # when wireshark is being installed, a blue prompt shows up, maybe --assume-yes
 # skip this (or --assume-no (?))
-for i in $packages; do echo "[adibil] Installing $i..."; sudo apt install -y $i; done
+for i in $packages; do echo "[adibil] Installing $i..."; sudo DEBIAN_FRONTEND=noninteractive apt install -y $i; done
 #sudo apt -y --ignore-missing install $packages
 
 # get dotfiles
