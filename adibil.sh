@@ -48,7 +48,7 @@ sudo apt -y install gnupg2
 echo "[adibil] Adding metasploit signature..."
 wget -qO- https://apt.metasploit.com/metasploit-framework.gpg.key | sudo apt-key add -
 echo "[adibil] Adding spotify signature..."
-wget -qO- https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add - 
+wget -qO- https://download.spotify.com/debian/pubkey_0D811D58.gpg | sudo apt-key add - 
 echo "[adibil] Adding vbox signatures..."
 wget -qO- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo apt-key add -
 wget -qO- https://www.virtualbox.org/download/oracle_vbox.asc | sudo apt-key add -
