@@ -98,16 +98,16 @@ config checkout
 config config --local status.showUntrackedFiles no
 
 #echo "[adibil] Changing shell to zsh..."
-#zshpath=$(which zsh)
-#sudo sed -i 's@'"$HOME"'.*@'"$HOME"':'"$zshpath"'@g' /etc/passwd
+zshpath=$(which zsh)
+sudo sed -i 's@'"$HOME"'.*@'"$HOME"':'"$zshpath"'@g' /etc/passwd
 
 #echo "[adibil] Changing default browser..."
 #xdg-settings set default-web-browser firefox-esr.desktop
 
 # install oh-my-zsh
-#echo "[adibil] Installing oh-my-zsh..."
-#wget -qO- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
-#mv .zshrc.pre-oh-my-zsh .zshrc
+echo "[adibil] Installing oh-my-zsh..."
+wget -qO- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
+mv .zshrc.pre-oh-my-zsh .zshrc
 
 # set home 
 # bin dicts dload mnt pic projects scripts src uni vbox
