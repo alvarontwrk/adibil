@@ -32,6 +32,7 @@ sudo sed -i 's/main/main non-free contrib/g' /etc/apt/sources.list
 echo "[adibil] Adding bullseye packages to source..."
 sudo sed -i 's/buster/bullseye/g' /etc/apt/sources.list
 sudo sed -i 's/bullseye\/updates/bullseye-security/g' /etc/apt/sources.list
+sudo apt update
 
 deb_metasploit='deb http://downloads.metasploit.com/data/releases/metasploit-framework/apt buster main'
 deb_spotify='deb http://repository.spotify.com stable non-free'
