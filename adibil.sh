@@ -40,16 +40,19 @@ deb_metasploit='deb http://downloads.metasploit.com/data/releases/metasploit-fra
 deb_spotify='deb http://repository.spotify.com stable non-free'
 deb_vbox='deb http://download.virtualbox.org/virtualbox/debian buster contrib' 
 deb_docker='deb https://download.docker.com/linux/debian buster stable'
+deb_brave='deb [arch=amd64] https://brave-browser-apt-release.s3.brave.com/ stable main'
 
 echo "[adibil] Adding extra sources..."
 echo $deb_metasploit | sudo tee /etc/apt/sources.list.d/metasploit-framework.list
 echo $deb_spotify | sudo tee /etc/apt/sources.list.d/spotify.list
 echo $deb_vbox | sudo tee /etc/apt/sources.list.d/virtualbox.list
 if [[ $arch == 'x86_64' ]]; then
+    echo $deb_brave | sudo tee /etc/apt/sources.list.d/brave.list
     echo $deb_docker | sudo tee /etc/apt/sources.list.d/docker.list
 fi
 
 # need to add signatures
+# TODO: apt-key add deprecated
 echo "[adibil] Adding apt signatures..."
 sudo apt -y install gnupg2
 echo "[adibil] Adding metasploit signature..."
@@ -61,7 +64,9 @@ wget -qO- https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo apt-ke
 wget -qO- https://www.virtualbox.org/download/oracle_vbox.asc | sudo apt-key add -
 if [[ $arch == 'x86_64' ]]; then
     echo "[adibil] Adding docker signatures..."
-    wget -qO- https://download.docker.com/linux/debian/gpg | sudo apt-key add
+    wget -qO- https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+    echo "[adibil] Adding brave signatures..."
+    wget -qO- https://brave-browser-apt-release.s3.brave.com/brave-core.asc | sudo apt-key add -
 fi
 
 # apt upgrade

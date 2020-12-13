@@ -1,4 +1,6 @@
 apt-transport-https # allow the usage of apt repositories with https
+bat # cat but better
+brave-browser # brave browser
 build-essential # needed for building software in general
 ca-certificates # common ca certificates
 chromium # alternative browser just in case
