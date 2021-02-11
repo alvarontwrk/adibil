@@ -2,3 +2,5 @@ firmware-atheros
 firmware-realtek
 intel-microcode
 nvidia-opencl-dev
+firmware-amd-graphics
+firmware-iwlwifi
