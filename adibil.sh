@@ -120,11 +120,13 @@ sudo sed -i 's@'"$HOME"'.*@'"$HOME"':'"$zshpath"'@g' /etc/passwd
 echo "[adibil] Installing oh-my-zsh..."
 wget -qO- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
 mv .zshrc.pre-oh-my-zsh .zshrc
+mkdir -p .cache/zsh
+touch .cache/zsh/history
 
 # set home 
 # bin dicts dload mnt pic projects scripts src uni vbox
 echo "[adibil] Setting home structure..."
-mkdir bin dicts dload mnt pic projects src uni
+mkdir bin dicts dload mnt pic projects src
 git clone https://gitlab.com/alvarontwrk/scripts.git
 xdg-user-dirs-update --set PICTURE $HOME/pic
 xdg-user-dirs-update --set DOWNLOAD $HOME/dload
