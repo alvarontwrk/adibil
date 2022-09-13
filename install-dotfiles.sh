@@ -7,13 +7,10 @@ config() {
     git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME "$@"
 }
 
-mv .bashrc .bashrc.bak
-mv .zshrc .zshrc.bak
-mv .tmux.conf .tmux.conf.bak
 git clone --bare https://github.com/alvarontwrk/dotfiles.git $HOME/.dotfiles
 config checkout
-config pull
 config config --local status.showUntrackedFiles no
+config reset --hard HEAD
 
 zshpath=$(which zsh)
 sudo sed -i 's@'"$HOME"'.*@'"$HOME"':'"$zshpath"'@g' /etc/passwd
