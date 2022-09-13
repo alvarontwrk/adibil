@@ -15,8 +15,8 @@ config config --local status.showUntrackedFiles no
 zshpath=$(which zsh)
 sudo sed -i 's@'"$HOME"'.*@'"$HOME"':'"$zshpath"'@g' /etc/passwd
 
-wget -qO- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash --keep-zshrc
-mv .zshrc.pre-oh-my-zsh .zshrc
+wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O /tmp/install-oh-my-zsh.sh
+CHSH=yes RUNZSH=yes KEEP_ZSHRC=yes sh /tmp/install-oh-my-zsh.sh
 mkdir -p .cache/zsh
 touch .cache/zsh/history
 
