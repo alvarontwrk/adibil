@@ -7,10 +7,10 @@ config() {
     git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME "$@"
 }
 
-git clone --bare https://github.com/alvarontwrk/dotfiles.git $HOME/.dotfiles
 mv .bashrc .bashrc.bak
 mv .zshrc .zshrc.bak
 mv .tmux.conf .tmux.conf.bak
+git clone --bare https://github.com/alvarontwrk/dotfiles.git $HOME/.dotfiles
 config checkout
 config config --local status.showUntrackedFiles no
 
