@@ -9,6 +9,8 @@ config() {
 
 git clone --bare https://github.com/alvarontwrk/dotfiles.git $HOME/.dotfiles
 mv .bashrc .bashrc.bak
+mv .zshrc .zshrc.bak
+mv .tmux.conf .tmux.conf.bak
 config checkout
 config config --local status.showUntrackedFiles no
 
