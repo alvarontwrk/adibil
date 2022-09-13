@@ -12,6 +12,7 @@ mv .zshrc .zshrc.bak
 mv .tmux.conf .tmux.conf.bak
 git clone --bare https://github.com/alvarontwrk/dotfiles.git $HOME/.dotfiles
 config checkout
+config pull
 config config --local status.showUntrackedFiles no
 
 zshpath=$(which zsh)
