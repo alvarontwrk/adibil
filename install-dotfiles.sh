@@ -16,6 +16,7 @@ zshpath=$(which zsh)
 sudo sed -i 's@'"$HOME"'.*@'"$HOME"':'"$zshpath"'@g' /etc/passwd
 
 wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O /tmp/install-oh-my-zsh.sh
+rm -rf $HOME/.oh-my-zsh
 CHSH=yes RUNZSH=yes KEEP_ZSHRC=yes sh /tmp/install-oh-my-zsh.sh
 mkdir -p .cache/zsh
 touch .cache/zsh/history
