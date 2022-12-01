@@ -1,0 +1,267 @@
+- name: Desktop provisioning
+  hosts: desktops
+  tasks:
+    - name: Install pre-requisites
+      apt:
+        name:
+          - apt-transport-https # allow the usage of apt repositories with https
+          - git
+          - sudo
+          - zsh
+          - gnupg2 # gpg
+
+    - name: Set timezone to Europe/Madrid
+      timezone:
+        name: Europe/Madrid
+
+    - name: Add 'alvaro' user
+      user:
+        name: alvaro
+        password: $6$MKXYocknasuu0OYs$SksmEmaHKH0rfwiYbTMXVyZJyMToBqf/8U5F4GbRPrIQhvZ7EVvJmn2gz7oVsymJGK/73sXC7JcToxDeWHB9P. # alvaro
+        shell: /usr/bin/zsh
+        groups: sudo
+
+    - name: Add brave respository apt key
+      apt_key:
+        url: https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+
+    - name: Add docker repository apt key
+      apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+
+    - name: Add metasploit repository apt key
+      apt_key:
+        url: https://apt.metasploit.com/metasploit-framework.gpg.key
+
+    - name: Add spotify repository apt key
+      apt_key:
+        url: https://download.spotify.com/debian/pubkey_0D811D58.gpg
+
+    - name: Add debian bookworm (12) sources (Spain)
+      block:
+        - name: Add base binary packages
+          apt_repository:
+            repo: deb https://debian.redimadrid.es/debian/ bookworm main
+            filename: debian-base
+            update_cache: no
+
+        - name: Add base source packages
+          apt_repository:
+            repo: deb-src https://debian.redimadrid.es/debian/ bookworm main
+            filename: debian-base
+            update_cache: no
+
+        - name: Add security binary packages
+          apt_repository:
+            repo: deb https://security.debian.org/debian-security bookworm-security main
+            filename: debian-security
+            update_cache: no
+
+        - name: Add security source packages
+          apt_repository:
+            repo: deb-src https://security.debian.org/debian-security bookworm-security main
+            filename: debian-security
+            update_cache: no
+
+        - name: Add updates binary packages
+          apt_repository:
+            repo: deb https://debian.redimadrid.es/debian/ bookworm-updates main
+            filename: debian-updates
+            update_cache: no
+
+        - name: Add updates source packages
+          apt_repository:
+            repo: deb-src https://debian.redimadrid.es/debian/ bookworm-updates main
+            filename: debian-updates
+            update_cache: no
+
+        - name: Add brave-browser repository
+          apt_repository:
+            repo: deb https://brave-browser-apt-release.s3.brave.com/ stable main
+            filename: brave-browser
+            update_cache: no
+
+        - name: Add docker repository
+          apt_repository:
+            repo: deb https://download.docker.com/linux/debian bullseye stable
+            filename: docker
+            update_cache: no
+
+        - name: Add metasploit repository
+          apt_repository:
+            repo: deb https://downloads.metasploit.com/data/releases/metasploit-framework/apt buster main
+            filename: metasploit
+            update_cache: no
+
+        - name: Add spotify repository
+          apt_repository:
+            repo: deb http://repository.spotify.com stable non-free
+            filename: spotify
+            update_cache: no
+
+        - name: Clear sources.list
+          copy:
+            content: "# See sources.list.d/\n"
+            dest: /etc/apt/sources.list
+
+        - name: Update sources cache
+          apt:
+            update_cache: yes
+
+    - name: Upgrade packages
+      apt:
+        upgrade: full
+
+    - name: Remove previous ohmyzsh installation
+      file:
+        path: /home/alvaro/.oh-my-zsh
+        state: absent
+
+    - name: Install ohmyzsh
+      become: true
+      become_user: alvaro
+      shell:
+        warn: false
+        cmd: curl -s https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh | bash
+        chdir: /home/alvaro
+
+    - name: Remove ohmyzsh .zshrc
+      file:
+        path: /home/alvaro/.zshrc
+        state: absent
+
+    - name: Create zsh history directory
+      become: true
+      become_user: alvaro
+      file:
+        path: /home/alvaro/.cache/zsh
+        state: directory
+
+    - name: Touch zsh history
+      become: true
+      become_user: alvaro
+      file:
+        path: /home/alvaro/.cache/zsh/history
+        state: touch
+
+    - name: Clone dotfiles
+      become: yes
+      become_user: alvaro
+      git:
+        repo: https://github.com/alvarontwrk/dotfiles.git
+        dest: /home/alvaro/.dotfiles
+        bare: yes
+
+    - name: Remove previous .bashrc
+      file:
+        path: /home/alvaro/.bashrc
+        state: absent
+
+    - name: Checkout dotfiles
+      become: yes
+      become_user: alvaro
+      shell:
+        chdir: /home/alvaro
+        #cmd: git --git-dir=/home/alvaro/.dotfiles/ --work-tree=/home/alvaro checkout
+        cmd: git --git-dir=/home/alvaro/.dotfiles/ --work-tree=/home/alvaro reset --hard
+
+    - name: Disable show untracked dotfiles
+      become: yes
+      become_user: alvaro
+      shell:
+        chdir: /home/alvaro
+        cmd: git --git-dir=/home/alvaro/.dotfiles/ --work-tree=/home/alvaro config --local status.showUntrackedFiles no
+
+    - name: Clone scripts
+      become: yes
+      become_user: alvaro
+      git:
+        repo: https://github.com/alvarontwrk/limbo
+        dest: /home/alvaro/scripts
+
+    - name: Install graphical interface
+      apt:
+        name:
+          - xfce4
+          - arc-theme
+          - network-manager-gnome
+          - papirus-icon-theme
+
+    - name: Install laptop-relative utilities
+      apt:
+        name:
+          - xfce4-power-manager
+
+    - name: Install tools
+      apt:
+        name:
+          - apt-transport-https # allow the usage of apt repositories with https
+          - bat # cat but better
+          - brave-browser # brave browser
+          - build-essential # needed for building software in general
+          - containerd.io # container runtime needed for docker
+          - curl # transfer data from or to a server with url syntax
+          - dbus-x11 # needed for launching gnome-terminal
+            #- discord # voice and text chat
+          - docker-ce # docker 
+          - docker-ce-cli # docker cli
+            #- feh # needed for wallpaper
+          - fonts-noto # google noto fonts
+          - g++ # c++ compiler
+          - gimp # image editor
+          - git-secret # git secret functionality
+          - gnome-terminal # gnome terminal emulator
+          - htop # interactive processes viewer
+            #- hugo # static site generator written in golang
+            #- i3blocks # i3 status line
+            #- i3lock # screen locker
+            #- i3-wm # i3 window manager
+          - jq # command-line json processor
+          - libbz2-dev # bz2 library
+          - libgmp-dev # multiprecision arithmetic library
+          - libimage-exiftool-perl # metadata library and program
+          - libpcap-dev # pcap library
+            #- libreoffice # office suite
+          - libssl-dev # ssl library
+          - locate # search for files
+            #- maim # takes screenshots
+          - metasploit-framework # metasploit
+          - neofetch # linux system information
+            #- neomutt # command-line mail reader
+          - neovim # neovim
+          - openvpn # vpn daemon
+          - php # php language
+          - pipenv # python packaging tool / virtual environment manager
+          - pkg-config # needed for compile libraries
+            #- sagemath # maths software
+            #- smartmontools # smart storage benchmark
+          - software-properties-common # repositories manager
+          - spotify-client # spotify client
+            #- suckless-tools # tools for minimalistic window managers (dmenu...)
+          - texlive-fonts-extra # latex fonts
+          - tldr # tldr client
+          - tmux # terminal multiplexer
+          - tree # displays directory tree
+          - vim-gtk # vim editor with gtk for easy clipboard integration
+            #- virtualbox-6.0 # virtualbox package
+          - wireshark
+          - xclip # command line interface to copy-paste
+          - xinput # configuration of xinput devices
+          - zlib1g-dev # compression library
+
+    - name: Virtualbox addons
+      when: "ansible_facts['virtualization_type'] == 'virtualbox'"
+      apt:
+        name: firefox
+    - name: Dpkg-reconfigre wireshark
+      debconf:
+        name: wireshark-common
+        question: wireshark-common/install-setuid
+        vtype: string
+        value: "true"
+
+    - name: Add "alvaro" user to wireshark group
+      user:
+        name: alvaro
+        groups: wireshark
+        append: true
